@@ -15,12 +15,14 @@ build_shared_lib = {'GLFW'      : 'ON',
 
 clean = "rm -rf "
 cmake = "cmake -G \"Visual Studio 14 2015 Win64\" -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS:BOOL="
+extraArg = ""
 
 def main(argv):
     if(wrongMinimalArgvLen() or wrongBuildArg()):
         printBuildArgList()
         exit()
 
+    parseExtraArg()
     updateOneOrAllLibrary(sys.argv[1])
 
 def wrongMinimalArgvLen():
@@ -39,26 +41,30 @@ def updateOneOrAllLibrary(arg):
        updateAllLibrary()
     else:
        updateLibrary(arg);
+       
+def parseExtraArg():
+    if(len(sys.argv) > 2):
+        extraArg = sys.argv[2]
 
 def updateAllLibrary():
     for lib in build_dir:
        compileLibrary(lib)
 
 def updateLibrary(lib):
-    if(isThirdArgument("svn")):
+    if(extraArg == "svn"):
         updateSvnRepository(lib)
     else:
         compileLibrary(lib)
 
 def compileLibrary(lib):
-    if(isThirdArgument("r")):
+    if(extraArg == "clean"):
         cleanBuildDirectory(lib)
         createBuildDirectory(lib)
-    runCmake(lib)
-    build(lib)
     
-def isThirdArgument(arg):
-    return (len(sys.argv) > 2 and sys.argv[2] == arg)
+    if(extraArg == "clean" or extraArg == "cmake"):
+        runCmake(lib)
+
+    build(lib)
 
 def updateSvnRepository(lib):
     reps = svn_dir[lib]
