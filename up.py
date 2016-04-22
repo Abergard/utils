@@ -17,21 +17,28 @@ clean = "rm -rf "
 cmake = "cmake -G \"Visual Studio 14 2015 Win64\" -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS:BOOL="
 
 def main(argv):
-    if(len(sys.argv) < 2 or
-       (sys.argv[1] != "all" and not sys.argv[1] in build_dir)):
-        print("Available lib to update: ")
-        for key in build_dir:
-            print('-' + key)
+    if(wrongMinimalArgvLen() or wrongBuildArg()):
+        printBuildArgList()
         exit()
 
-    lib = sys.argv[1]
-    if(lib == "all"):
+    updateOneOrAllLibrary(sys.argv[1])
+
+def wrongMinimalArgvLen():
+    return (len(sys.argv) < 2)
+    
+def wrongBuildArg():
+    (sys.argv[1] != "all" and not sys.argv[1] in build_dir)
+    
+def printBuildArgList():
+    print("Available lib to update: ")
+    for key in build_dir:
+        print('-' + key)
+        
+def updateOneOrAllLibrary(arg):
+    if(arg == "all"):
        updateAllLibrary()
     else:
-       updateLibrary(lib);
-       
-def checkMinimalArgvLen():
-    return 
+       updateLibrary(arg);
 
 def updateAllLibrary():
     for lib in build_dir:
