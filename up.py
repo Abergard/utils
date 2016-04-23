@@ -27,21 +27,21 @@ def main(argv):
 
 def wrongMinimalArgvLen():
     return (len(sys.argv) < 2)
-    
+
 def wrongBuildArg():
     (sys.argv[1] != "all" and not sys.argv[1] in build_dir)
-    
+
 def printBuildArgList():
     print("Available lib to update: ")
     for key in build_dir:
         print('-' + key)
-        
+
 def updateOneOrAllLibrary(arg):
     if(arg == "all"):
        updateAllLibrary()
     else:
        updateLibrary(arg);
-       
+
 def parseExtraArg():
     if(len(sys.argv) > 2):
         extraArg = sys.argv[2]
@@ -60,7 +60,7 @@ def compileLibrary(lib):
     if(extraArg == "clean"):
         cleanBuildDirectory(lib)
         createBuildDirectory(lib)
-    
+
     if(extraArg == "clean" or extraArg == "cmake"):
         runCmake(lib)
 
