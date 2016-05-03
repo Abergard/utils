@@ -2,7 +2,8 @@ import os, sys, getopt
 
 build_dir = {'GLFW'      : 'c:\\src\\glfw\\build',
              'glbinding' : 'c:\\src\\glbinding\\build',
-             'LLVM'     : 'c:\\src\\llvm\\build'}
+             'LLVM'     : 'c:\\src\\llvm\\build',
+             'SOIL'     : 'c:\\src\\Simple-OpenGL-Image-Library\\build'}
 
 clang_svn = {'llvm' : 'c:\\src\\llvm',
              'clang' : 'c:\\src\\llvm\\tools\\clang'}
@@ -11,7 +12,8 @@ svn_dir = {'LLVM' : clang_svn}
 
 build_shared_lib = {'GLFW'      : 'ON',
                     'glbinding' : 'ON',
-                    'LLVM'      : 'OFF'}
+                    'LLVM'      : 'OFF',
+                    'SOIL'      : 'OFF'}
 
 clean = "rm -rf "
 cmake = "cmake -G \"Visual Studio 14 2015 Win64\" -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS:BOOL="
@@ -61,7 +63,7 @@ def compileLibrary(lib):
         cleanBuildDirectory(lib)
         createBuildDirectory(lib)
 
-    if(extraArg == "clean" or extraArg == "cmake"):
+    if(extraArg == "clean" or extraArg == "recmake"):
         runCmake(lib)
 
     build(lib)
