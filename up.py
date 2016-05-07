@@ -46,6 +46,7 @@ def updateOneOrAllLibrary(arg):
 
 def parseExtraArg():
     if(len(sys.argv) > 2):
+        global extraArg
         extraArg = sys.argv[2]
 
 def updateAllLibrary():
