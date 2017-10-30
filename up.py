@@ -6,7 +6,8 @@ build_dir = {'GLFW': 'c:\\src\\glfw\\build',
              'LLVM': 'c:\\src\\llvm\\build',
              'SOIL': 'c:\\src\\Simple-OpenGL-Image-Library\\build'}
 
-clang_svn = {'llvm': 'c:\\src\\llvm', 'clang': 'c:\\src\\llvm\\tools\\clang'}
+clang_svn = {'llvm': 'c:\\src\\llvm',
+             'clang': 'c:\\src\\llvm\\tools\\clang'}
 
 svn_dir = {'LLVM': clang_svn}
 build_shared_lib = {'GLFW': 'ON',
@@ -15,7 +16,7 @@ build_shared_lib = {'GLFW': 'ON',
                     'SOIL': 'OFF'}
 
 clean = "rm -rf "
-cmake = "cmake -G \"Visual Studio 14 2015 Win64\" -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS:BOOL="
+cmake = "cmake -G \"Visual Studio 14 2015 Win64\" -DCMAKE_BUILD_TYPE=RELEASE -Thost=x64 -DBUILD_SHARED_LIBS:BOOL="
 extraArg = ""
 
 
