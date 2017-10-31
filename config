@@ -1,0 +1,12 @@
+Host *
+    ForwardAgent yes
+    ForwardX11 yes
+    ForwardX11Trusted yes
+    
+    
+#   IdentifyFile ...
+    Port 22
+    Protocol 2
+#   Cipher 3des
+    GSSAPIDelegateCredentials no
+    XauthLocation "C:/Program Files/VcXsrv/xauth"
